@@ -63,15 +63,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="GestionUsuario.xaml.cs">
+	  <Compile Update="Views\Admin\GestionUsuario.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="GestionUsuario.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\Admin\GestionUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

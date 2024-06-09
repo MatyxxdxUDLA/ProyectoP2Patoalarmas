@@ -17,18 +17,31 @@ public partial class GestionUsuario : ContentPage
         // Cargar los datos de los usuarios, si necesario
         viewModel.CargarUsuarios();
     }
-    private async void OnAgregarUsuarioClicked(object sender, EventArgs e)
+
+    private async void OnGuardarUsuarioClicked(object sender, EventArgs e)
     {
-        string nombre = await DisplayPromptAsync("Nuevo Usuario", "Ingrese el nombre del usuario:");
-        if (!string.IsNullOrWhiteSpace(nombre))
+        var cedula = CedulaEntry.Text;
+        var nombre = NombreEntry.Text;
+        var email = EmailEntry.Text;
+        var password = PasswordEntry.Text;
+
+        if (!string.IsNullOrWhiteSpace(cedula) && !string.IsNullOrWhiteSpace(nombre) && !string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password))
         {
-            string email = await DisplayPromptAsync("Nuevo Usuario", "Ingrese el email del usuario:");
-            if (!string.IsNullOrWhiteSpace(email))
-            {
-                // Aquí, asumimos que tienes una función en tu ViewModel para agregar el usuario.
-                // Puedes pasar más información según el modelo de tu usuario.
-                viewModel.AgregarUsuario(new Usuario { Nombre = nombre, Email = email });
-            }
+            // Asumiendo que tienes una función en tu ViewModel para agregar el usuario.
+            viewModel.AgregarUsuario(new Usuario { Cedula = cedula, Nombre = nombre, Email = email, Password = password });
+
+            // Limpiar los campos después de agregar el usuario
+            CedulaEntry.Text = "";
+            NombreEntry.Text = "";
+            EmailEntry.Text = "";
+            PasswordEntry.Text = "";
+        }
+        else
+        {
+            // Mostrar un mensaje de error al usuario indicando que todos los campos son requeridos
+            await DisplayAlert("Error de Validación", "Por favor, complete todos los campos requeridos para continuar.", "OK");
         }
     }
+
+
 }

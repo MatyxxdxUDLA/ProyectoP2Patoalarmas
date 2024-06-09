@@ -2,18 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.GestionUsuario"
-             Title="GestionUsuario">
+             Title="Gestión de Usuarios">
+
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20">
 
-            <!-- Botón para agregar un nuevo usuario -->
-            <Button Text="Agregar Nuevo Usuario"
-                Clicked="OnAgregarUsuarioClicked"/>
+            <!-- Formulario para agregar un nuevo usuario -->
+            <Label Text="Agregar Nuevo Usuario" FontAttributes="Bold" FontSize="Medium"/>
+            <Entry x:Name="CedulaEntry" Placeholder="Ingrese la cédula del usuario"/>
+            <Entry x:Name="NombreEntry" Placeholder="Ingrese el nombre del usuario"/>
+            <Entry x:Name="EmailEntry" Placeholder="Ingrese el email del usuario"/>
+            <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Ingrese la contraseña del usuario"/>
+            <Button Text="Guardar Usuario"
+                    Clicked="OnGuardarUsuarioClicked"/>
 
             <!-- Lista de usuarios -->
             <CollectionView x:Name="UsuariosListView"
-                        SelectionMode="Single"
-                        ItemsSource="{Binding Usuarios}">
+                            SelectionMode="Single"
+                            ItemsSource="{Binding Usuarios}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
@@ -24,18 +30,18 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Text="{Binding Nombre}"
-                               VerticalOptions="Center"
-                               HorizontalOptions="StartAndExpand"/>
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand"/>
 
                             <!-- Botones para editar y eliminar -->
                             <Button Grid.Column="1"
-                                Text="Editar"
-                                Command="{Binding Path=BindingContext.EditarUsuarioCommand, Source={x:Reference Name=Page}}"
-                                CommandParameter="{Binding .}"/>
+                                    Text="Editar"
+                                    Command="{Binding Path=BindingContext.EditarUsuarioCommand, Source={x:Reference Name=Page}}"
+                                    CommandParameter="{Binding .}"/>
                             <Button Grid.Column="2"
-                                Text="Eliminar"
-                                Command="{Binding Path=BindingContext.EliminarUsuarioCommand, Source={x:Reference Name=Page}}"
-                                CommandParameter="{Binding .}"/>
+                                    Text="Eliminar"
+                                    Command="{Binding Path=BindingContext.EliminarUsuarioCommand, Source={x:Reference Name=Page}}"
+                                    CommandParameter="{Binding .}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
