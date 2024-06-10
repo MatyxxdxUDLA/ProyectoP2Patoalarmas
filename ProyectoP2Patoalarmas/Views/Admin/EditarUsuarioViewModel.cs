@@ -46,11 +46,7 @@ namespace ProyectoP2Patoalarmas.Views.Admin
 
         private async Task Volver()
         {
-            // Asumiendo que estás utilizando NavigationPage para manejar la navegación
-            if (Application.Current.MainPage is NavigationPage navigationPage)
-            {
-                await navigationPage.Navigation.PopAsync();  // Usa await aquí
-            }
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

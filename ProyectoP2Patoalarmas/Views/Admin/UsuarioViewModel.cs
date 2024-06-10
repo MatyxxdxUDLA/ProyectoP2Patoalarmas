@@ -51,9 +51,19 @@ namespace ProyectoP2Patoalarmas.Views.Admin
 
         public async Task CargarUsuarios()
         {
+            /*
             var usuariosFromDb = await _context.Usuarios.ToListAsync();
             Usuarios.Clear();
             foreach (var usuario in usuariosFromDb)
+            {
+                Usuarios.Add(usuario);
+            }
+            */
+
+            using var context = new AppDbContext();
+            var usuarios = await context.Usuarios.ToListAsync();
+            Usuarios.Clear();
+            foreach (var usuario in usuarios)
             {
                 Usuarios.Add(usuario);
             }
@@ -62,9 +72,17 @@ namespace ProyectoP2Patoalarmas.Views.Admin
 
         public async Task AddUser(Usuario usuario)
         {
+            /*
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
             Usuarios.Add(usuario);
+            */
+
+            using var context = new AppDbContext();
+            context.Add(usuario);
+            await context.SaveChangesAsync();
+            Usuarios.Add(usuario);
+            OnPropertyChanged(nameof(Usuarios));
         }
 
         // Agregar usuario ya existente

@@ -17,11 +17,7 @@ public partial class GestionUsuario : ContentPage
 
     private async void OnAppearing(object sender, EventArgs e)
     {
-        // Asegúrate de no recargar los datos cada vez que la vista aparezca si no es necesario
-        if (viewModel.Usuarios.Count == 0)
-        {
-            await viewModel.CargarUsuarios();
-        }
+        await viewModel.CargarUsuarios();
     }
 
     private async void OnGuardarUsuarioClicked(object sender, EventArgs e)
