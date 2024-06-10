@@ -3,16 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.EditarUsuarioPage"
              x:Name="GestionUsuario_Editar"
-             Title="Editar Usuario">
+             Title="Editar Usuario"
+             BackgroundColor="#243447">
+    <!-- Color de fondo para mantener consistencia -->
 
-    <StackLayout Padding="20">
-        <Entry x:Name="CedulaEntry" Placeholder="Cédula" Text="{Binding Usuario.Cedula}"/>
-        <Entry x:Name="NombreEntry" Placeholder="Nombre" Text="{Binding Usuario.Nombre}"/>
-        <Entry x:Name="EmailEntry" Placeholder="Email" Text="{Binding Usuario.Email}"/>
-        <Entry x:Name="PasswordEntry" Placeholder="Contraseña" Text="{Binding Usuario.Password}"/>
-        <Button Text="Guardar Cambios" Command="{Binding GuardarCambiosCommand}"/>
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30"
+                             VerticalOptions="Center" HorizontalOptions="Fill">
 
-        <!-- Botón para volver sin guardar -->
-        <Button Text="Volver" Command="{Binding VolverCommand}"/>
-    </StackLayout>
+            <!-- Campos de texto con estilo unificado -->
+            <Entry x:Name="CedulaEntry" Placeholder="Cédula" Text="{Binding Usuario.Cedula}"
+                   PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="NombreEntry" Placeholder="Nombre" Text="{Binding Usuario.Nombre}"
+                   PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="EmailEntry" Placeholder="Email" Text="{Binding Usuario.Email}"
+                   PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Contraseña" Text="{Binding Usuario.Password}"
+                   PlaceholderColor="Gray" TextColor="White"/>
+
+            <!-- Botones con estilos coherentes -->
+            <Button Text="Guardar Cambios" BackgroundColor="#3355AA" TextColor="White" CornerRadius="5"
+                    Command="{Binding GuardarCambiosCommand}"/>
+            <Button Text="Volver" BackgroundColor="#555555" TextColor="White" CornerRadius="5"
+                    Command="{Binding VolverCommand}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

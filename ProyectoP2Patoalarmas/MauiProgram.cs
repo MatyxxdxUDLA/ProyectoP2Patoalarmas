@@ -1,43 +1,33 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using ProyectoP2Patoalarmas;
-using Microsoft.Extensions.Logging;  // Asegúrate de usar el namespace correcto para AppDbContext
+using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoP2Patoalarmas
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            });
+
+        // Configuración del servicio de DbContext
+        builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlite($"Filename=MiAppDatabase.db"));
+
+        var app = builder.Build();
+
+        // Forzar la eliminación y recreación de la base de datos (para desarrollo)
+        using (var scope = app.Services.CreateScope())
         {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
-            // Configura el DbContext para usar SQLite
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite("Filename=MiAppDatabase.db"));
-
-            // Crear e inicializar la base de datos al inicio de la app
-            InitializeDatabase(builder.Services);
-
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
-
-            return builder.Build();
-        }
-
-        private static void InitializeDatabase(IServiceCollection services)
-        {
-            using var serviceProvider = services.BuildServiceProvider();
-            using var scope = serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            dbContext.Database.EnsureCreated();  // Asegura que la base de datos esté creada
+
+            dbContext.Database.EnsureCreated(); // Asegurar la creación de la base de datos y las tablas
         }
+
+        return app;
     }
 }

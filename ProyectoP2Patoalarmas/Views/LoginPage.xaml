@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoP2Patoalarmas.Views.LoginPage"
+             Title="Login - PatoAlarmas"
+             BackgroundColor="#123456">
+    <!-- Cambia el color de fondo según tu paleta -->
+
+    <VerticalStackLayout Spacing="25" Padding="30"
+                         VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+
+        <Image Source="logo.png" HorizontalOptions="Center" HeightRequest="100"/>
+        <!-- Asegúrate de tener el logo en los recursos -->
+
+        <Label Text="Bienvenido a PatoAlarmas" HorizontalOptions="Center" FontSize="Large" TextColor="White" FontAttributes="Bold"/>
+
+        <Entry x:Name="UsernameEntry" Placeholder="Nombre de usuario"
+               VerticalOptions="Start" Keyboard="Text"
+               FontSize="Medium" PlaceholderColor="#AAAAAA" TextColor="White"/>
+
+        <Entry x:Name="PasswordEntry" Placeholder="Contraseña"
+               VerticalOptions="Start" IsPassword="True"
+               FontSize="Medium" PlaceholderColor="#AAAAAA" TextColor="White"/>
+
+        <Button Text="Iniciar sesión" HorizontalOptions="Fill"
+                Clicked="OnLoginButtonClicked" BackgroundColor="#3355AA" TextColor="White"
+                FontAttributes="Bold" CornerRadius="5"/>
+
+        <Label x:Name="MessageLabel" TextColor="Red" IsVisible="False" HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

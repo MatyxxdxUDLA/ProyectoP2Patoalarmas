@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoP2Patoalarmas.Views.Admin.GestionTurnosPage"
+             Title="Gestión de Turnos">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20" BackgroundColor="#243447">
+
+            <!-- Búsqueda de usuario por cédula -->
+            <Frame Padding="15" CornerRadius="10" BackgroundColor="#2E3A59">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Buscar Usuario por Cédula" FontSize="Medium" FontAttributes="Bold" TextColor="White"/>
+                    <Entry x:Name="CedulaEntry" Placeholder="Ingrese cédula" Keyboard="Numeric" TextColor="White" PlaceholderColor="Gray"/>
+                    <Button Text="Buscar" 
+                        Command="{Binding BuscarUsuarioCommand}" 
+                        CommandParameter="{Binding Text, Source={x:Reference CedulaEntry}}" 
+                        BackgroundColor="#4CAF50" 
+                        TextColor="White"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Información del usuario -->
+            <Frame Padding="15" CornerRadius="10" BackgroundColor="#2E3A59" IsVisible="{Binding UsuarioEncontrado}">
+                <VerticalStackLayout>
+                    <Label Text="{Binding Usuario.Nombre}" FontSize="Medium" TextColor="White" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Email}" TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Selección de servicios -->
+            <Picker x:Name="ServicioPicker" Title="Seleccione un Servicio" ItemsSource="{Binding Servicios}" ItemDisplayBinding="{Binding Nombre}" BackgroundColor="White" TextColor="Black"/>
+
+            <!-- Selector de fecha y hora -->
+            <DatePicker x:Name="FechaPicker" TextColor="White" Format="D" />
+            <TimePicker x:Name="HoraPicker" TextColor="White" Format="T" />
+
+            <!-- Botón para guardar el turno -->
+            <Button Text="Agendar Turno" Command="{Binding AgendarTurnoCommand}" BackgroundColor="#4CAF50" TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

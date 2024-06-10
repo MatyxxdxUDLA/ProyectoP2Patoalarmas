@@ -88,9 +88,23 @@ namespace ProyectoP2Patoalarmas.Views.Admin
         // Agregar usuario ya existente
         public async Task EditarUsuario(Usuario usuario)
         {
+            
             var editPage = new EditarUsuarioPage();
             editPage.BindingContext = new EditarUsuarioViewModel(usuario);
             await Application.Current.MainPage.Navigation.PushAsync(editPage);
+            
+            /*
+            var editPage = new EditarUsuarioPage();
+            editPage.BindingContext = new EditarUsuarioViewModel(usuario);
+            if (Application.Current.MainPage is NavigationPage navigationPage)
+            {
+                await navigationPage.Navigation.PushAsync(editPage);
+            }
+            else
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(editPage);  // Asegúrate de que MainPage es una NavigationPage
+            }
+            */
         }
 
         // Eliminar usuario

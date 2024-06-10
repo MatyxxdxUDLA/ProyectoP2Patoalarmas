@@ -3,12 +3,12 @@
     x:Class="ProyectoP2Patoalarmas.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ProyectoP2Patoalarmas.Views.Admin;assembly=ProyectoP2Patoalarmas"
+    xmlns:local="clr-namespace:ProyectoP2Patoalarmas.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="ProyectoP2Patoalarmas">
 
     <ShellContent
         Title="Gestión de Usuario"
-        ContentTemplate="{DataTemplate local:GestionUsuario}"
-        Route="GestionUsuario" />
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
 </Shell>

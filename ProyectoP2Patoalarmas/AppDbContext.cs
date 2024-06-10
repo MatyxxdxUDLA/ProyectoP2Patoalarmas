@@ -11,6 +11,9 @@ namespace ProyectoP2Patoalarmas
     public class AppDbContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<Vehiculo> Vehiculos { get; set; }
+
 
         // Constructor que acepta DbContextOptions
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -29,5 +32,15 @@ namespace ProyectoP2Patoalarmas
                 optionsBuilder.UseSqlite("Filename=MiAppDatabase.db");
             }
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Vehiculo>()
+                .HasOne(v => v.Usuario)
+                .WithMany(u => u.Vehiculos)
+                .HasForeignKey(v => v.UsuarioId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
     }
 }

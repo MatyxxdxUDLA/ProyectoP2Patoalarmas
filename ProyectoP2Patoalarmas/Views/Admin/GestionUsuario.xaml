@@ -3,18 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.GestionUsuario"
              x:Name="Gestion_Usuario"
-             Title="Gestión de Usuarios">
+             Title="Gestión de Usuarios"
+             BackgroundColor="#243447">
+    <!-- Color de fondo para mantener consistencia -->
 
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20">
 
-            <!-- Formulario para agregar un nuevo usuario -->
-            <Label Text="Agregar Nuevo Usuario" FontAttributes="Bold" FontSize="Medium"/>
-            <Entry x:Name="CedulaEntry" Placeholder="Ingrese la cédula del usuario"/>
-            <Entry x:Name="NombreEntry" Placeholder="Ingrese el nombre del usuario"/>
-            <Entry x:Name="EmailEntry" Placeholder="Ingrese el email del usuario"/>
-            <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Ingrese la contraseña del usuario"/>
-            <Button Text="Guardar Usuario" Clicked="OnGuardarUsuarioClicked"/>
+            <!-- Título y formulario para agregar un nuevo usuario -->
+            <Label Text="Agregar Nuevo Usuario" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+            <Entry x:Name="CedulaEntry" Placeholder="Ingrese la cédula del usuario" PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="NombreEntry" Placeholder="Ingrese el nombre del usuario" PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="EmailEntry" Placeholder="Ingrese el email del usuario" PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Ingrese la contraseña del usuario" PlaceholderColor="Gray" TextColor="White"/>
+            <Button Text="Guardar Usuario" Clicked="OnGuardarUsuarioClicked" BackgroundColor="#3355AA" TextColor="White" CornerRadius="5"/>
 
             <!-- Lista de usuarios -->
             <CollectionView x:Name="UsuariosListView" SelectionMode="Single" ItemsSource="{Binding Usuarios}">
@@ -37,10 +39,10 @@
                                    VerticalOptions="Center" HorizontalOptions="Start"/>
 
                             <!-- Botones para editar y eliminar -->
-                            <Button Grid.Column="2" Text="Editar" 
+                            <Button Grid.Column="2" Text="Editar" BackgroundColor="#3355AA" TextColor="White" CornerRadius="5"
                                 Command="{Binding Path=BindingContext.EditarUsuarioCommand, Source={x:Reference Gestion_Usuario}}"
                                 CommandParameter="{Binding}"/>
-                            <Button Grid.Column="3" Text="Eliminar" 
+                            <Button Grid.Column="3" Text="Eliminar" BackgroundColor="DarkRed" TextColor="White" CornerRadius="5"
                                 Command="{Binding Path=BindingContext.EliminarUsuarioCommand, Source={x:Reference Gestion_Usuario}}"
                                 CommandParameter="{Binding}"/>
                         </Grid>
