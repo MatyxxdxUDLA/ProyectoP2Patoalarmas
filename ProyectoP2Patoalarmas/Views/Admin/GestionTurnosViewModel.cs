@@ -68,7 +68,7 @@ namespace ProyectoP2Patoalarmas.Views.Admin
 
         private async Task ExecuteAgendarTurno()
         {
-            string folderPath = @"C:\Agendamiento de Turnos";
+            string folderPath = FileSystem.AppDataDirectory;  // Usar AppDataDirectory para almacenar archivos de forma segura en todas las plataformas
             string filename = Path.Combine(folderPath, "agendamientos.txt");
 
             if (Usuario == null || ServicioSeleccionado == null)
@@ -77,21 +77,12 @@ namespace ProyectoP2Patoalarmas.Views.Admin
                 return;
             }
 
-            string turnoInfo = $"Usuario: {Usuario.Nombre}, Servicio: {ServicioSeleccionado.Nombre}, Fecha: {FechaSeleccionada}, Hora: {HoraSeleccionada}\n";
-            Console.WriteLine("Intentando guardar turno...");
-            Console.WriteLine($"Datos: {turnoInfo}");
+            string turnoInfo = $"Usuario: {Usuario.Nombre}, Servicio: {ServicioSeleccionado.Nombre}, Fecha: {FechaSeleccionada.ToShortDateString()}, Hora: {HoraSeleccionada}\n";
 
             try
             {
-                if (!Directory.Exists(folderPath))
-                {
-                    Console.WriteLine("Carpeta no existe, creando...");
-                    Directory.CreateDirectory(folderPath);
-                }
-
                 if (!File.Exists(filename))
                 {
-                    Console.WriteLine("Archivo no existe, creando...");
                     using (var writer = File.CreateText(filename))
                     {
                         await writer.WriteLineAsync(turnoInfo);
@@ -99,19 +90,19 @@ namespace ProyectoP2Patoalarmas.Views.Admin
                 }
                 else
                 {
-                    Console.WriteLine("Archivo existe, añadiendo...");
                     using (var writer = File.AppendText(filename))
                     {
                         await writer.WriteLineAsync(turnoInfo);
                     }
                 }
-                Console.WriteLine("Turno guardado exitosamente.");
+                Console.WriteLine("Turno guardado exitosamente en: " + filename);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al guardar el turno: {ex.Message}");
             }
         }
+
 
         private async Task TestWriteFile()
         {
@@ -155,6 +146,25 @@ namespace ProyectoP2Patoalarmas.Views.Admin
                 Servicios.Add(usuario);
             }
         }
+
+        public string FileInfoText { get; set; }
+
+        private void UpdateFileInfoDisplay()
+        {
+            string folderPath = FileSystem.AppDataDirectory;
+            string filename = Path.Combine(folderPath, "agendamientos.txt");
+
+            if (File.Exists(filename))
+            {
+                FileInfoText = $"Archivo encontrado en: {filename}";
+            }
+            else
+            {
+                FileInfoText = "Archivo no encontrado.";
+            }
+            OnPropertyChanged(nameof(FileInfoText)); // Notificar cambios a la UI si estás usando Binding
+        }
+
     }
 
 }

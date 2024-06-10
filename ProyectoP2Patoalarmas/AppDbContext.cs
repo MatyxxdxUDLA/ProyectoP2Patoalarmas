@@ -22,6 +22,7 @@ namespace ProyectoP2Patoalarmas
 
         public AppDbContext()
         {
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

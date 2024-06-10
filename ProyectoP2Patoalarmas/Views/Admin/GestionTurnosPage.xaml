@@ -38,6 +38,8 @@
             <!-- Botón para guardar el turno -->
             <Button Text="Agendar Turno" Command="{Binding AgendarTurnoCommand}" BackgroundColor="#4CAF50" TextColor="White"/>
 
+            <Label Text="{Binding FileInfoText}" />
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
