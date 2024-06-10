@@ -5,17 +5,23 @@ namespace ProyectoP2Patoalarmas.Views.Admin;
 public partial class GestionUsuario : ContentPage
 {
     private UsuarioViewModel viewModel;
+
     public GestionUsuario()
-	{
-		InitializeComponent();
-        // Crear una instancia del ViewModel
+    {
+        InitializeComponent();
         viewModel = new UsuarioViewModel();
-
-        // Establecer el contexto de datos de la página
         this.BindingContext = viewModel;
+        // Asignar el manejador de eventos
+        this.Appearing += OnAppearing;
+    }
 
-        // Cargar los datos de los usuarios, si necesario
-        viewModel.CargarUsuarios();
+    private async void OnAppearing(object sender, EventArgs e)
+    {
+        // Asegúrate de no recargar los datos cada vez que la vista aparezca si no es necesario
+        if (viewModel.Usuarios.Count == 0)
+        {
+            await viewModel.CargarUsuarios();
+        }
     }
 
     private async void OnGuardarUsuarioClicked(object sender, EventArgs e)
@@ -27,14 +33,24 @@ public partial class GestionUsuario : ContentPage
 
         if (!string.IsNullOrWhiteSpace(cedula) && !string.IsNullOrWhiteSpace(nombre) && !string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password))
         {
-            // Asumiendo que tienes una función en tu ViewModel para agregar el usuario.
-            viewModel.AgregarUsuario(new Usuario { Cedula = cedula, Nombre = nombre, Email = email, Password = password });
+            Usuario nuevoUsuario = new Usuario
+            {
+                Cedula = cedula,
+                Nombre = nombre,
+                Email = email,
+                Password = password
+            };
+
+            await viewModel.AddUser(nuevoUsuario);
 
             // Limpiar los campos después de agregar el usuario
             CedulaEntry.Text = "";
             NombreEntry.Text = "";
             EmailEntry.Text = "";
             PasswordEntry.Text = "";
+
+            // Opcional: Recargar la lista de usuarios
+            await viewModel.CargarUsuarios();
         }
         else
         {
@@ -42,6 +58,4 @@ public partial class GestionUsuario : ContentPage
             await DisplayAlert("Error de Validación", "Por favor, complete todos los campos requeridos para continuar.", "OK");
         }
     }
-
-
 }

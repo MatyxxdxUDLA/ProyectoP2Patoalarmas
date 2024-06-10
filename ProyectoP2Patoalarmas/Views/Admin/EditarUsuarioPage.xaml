@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoP2Patoalarmas.Views.Admin.EditarUsuarioPage"
+             x:Name="GestionUsuario_Editar"
+             Title="Editar Usuario">
+
+    <StackLayout Padding="20">
+        <Entry x:Name="CedulaEntry" Placeholder="Cédula" Text="{Binding Usuario.Cedula}"/>
+        <Entry x:Name="NombreEntry" Placeholder="Nombre" Text="{Binding Usuario.Nombre}"/>
+        <Entry x:Name="EmailEntry" Placeholder="Email" Text="{Binding Usuario.Email}"/>
+        <Entry x:Name="PasswordEntry" Placeholder="Contraseña" Text="{Binding Usuario.Password}"/>
+        <Button Text="Guardar Cambios" Command="{Binding GuardarCambiosCommand}"/>
+
+        <!-- Botón para volver sin guardar -->
+        <Button Text="Volver" Command="{Binding VolverCommand}"/>
+    </StackLayout>
+</ContentPage>

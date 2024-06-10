@@ -1,18 +1,17 @@
 ﻿using ProyectoP2Patoalarmas.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProyectoP2Patoalarmas.Views.Admin
 {
     public class UsuarioViewModel : INotifyPropertyChanged
     {
+        private readonly AppDbContext _context = new AppDbContext();
         public ObservableCollection<Usuario> Usuarios { get; set; }
+
         public ICommand AgregarUsuarioCommand { get; private set; }
         public ICommand EditarUsuarioCommand { get; private set; }
         public ICommand EliminarUsuarioCommand { get; private set; }
@@ -20,36 +19,74 @@ namespace ProyectoP2Patoalarmas.Views.Admin
         public UsuarioViewModel()
         {
             Usuarios = new ObservableCollection<Usuario>();
-            AgregarUsuarioCommand = new Command(ExecuteAgregarUsuario);
-            EditarUsuarioCommand = new Command<Usuario>(ExecuteEditarUsuario);
-            EliminarUsuarioCommand = new Command<Usuario>(ExecuteEliminarUsuario);
+            AgregarUsuarioCommand = new Command(async () => await ExecuteAgregarUsuario());
+            EditarUsuarioCommand = new Command<Usuario>(async (usuario) => await EditarUsuario(usuario));
+            EliminarUsuarioCommand = new Command<Usuario>(async (usuario) => await EliminarUsuario(usuario));
         }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void ExecuteAgregarUsuario()
+        private async Task ExecuteAgregarUsuario()
         {
-            // Lógica para agregar usuario
+            // Example logic to add a new user
+            Usuario newUser = new Usuario { Cedula = "New User", Nombre = "Test", Email = "test@example.com", Password = "password" };
+            await AddUser(newUser);
         }
 
-        private void ExecuteEditarUsuario(Usuario usuario)
+        private async Task ExecuteEditarUsuario(Usuario usuario)
         {
-            // Lógica para editar usuario
+            // Logic to edit an existing user
+            usuario.Nombre = "Updated Name"; // Example change
+            _context.Usuarios.Update(usuario);
+            await _context.SaveChangesAsync();
         }
 
-        private void ExecuteEliminarUsuario(Usuario usuario)
+        private async Task ExecuteEliminarUsuario(Usuario usuario)
         {
-            // Lógica para eliminar usuario
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+            Usuarios.Remove(usuario);
         }
 
-        public void CargarUsuarios()
+        public async Task CargarUsuarios()
         {
-            // Cargar datos de usuarios desde la base de datos o servicio
+            var usuariosFromDb = await _context.Usuarios.ToListAsync();
+            Usuarios.Clear();
+            foreach (var usuario in usuariosFromDb)
+            {
+                Usuarios.Add(usuario);
+            }
         }
-        public void AgregarUsuario(Usuario usuario)
+
+
+        public async Task AddUser(Usuario usuario)
         {
-            // Aquí deberías agregar lógica para guardar el usuario en la base de datos
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
             Usuarios.Add(usuario);
+        }
+
+        // Agregar usuario ya existente
+        public async Task EditarUsuario(Usuario usuario)
+        {
+            var editPage = new EditarUsuarioPage();
+            editPage.BindingContext = new EditarUsuarioViewModel(usuario);
+            await Application.Current.MainPage.Navigation.PushAsync(editPage);
+        }
+
+        // Eliminar usuario
+        public async Task EliminarUsuario(Usuario usuario)
+        {
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
+            Usuarios.Remove(usuario);
+            OnPropertyChanged(nameof(Usuarios));  // Notificar que la lista ha cambiado
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
