@@ -1,3 +1,4 @@
+using ProyectoP2Patoalarmas.ViewModels;
 namespace ProyectoP2Patoalarmas.Views.Admin;
 
 public partial class GestionTurnosPage : ContentPage

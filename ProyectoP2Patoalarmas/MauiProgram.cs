@@ -24,6 +24,7 @@ public static class MauiProgram
         using (var scope = app.Services.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            //dbContext.Database.EnsureDeleted();
 
             dbContext.Database.EnsureCreated(); // Asegurar la creación de la base de datos y las tablas
         }

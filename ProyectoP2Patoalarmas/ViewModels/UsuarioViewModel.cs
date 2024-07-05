@@ -4,8 +4,9 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
+using ProyectoP2Patoalarmas.Views.Admin;
 
-namespace ProyectoP2Patoalarmas.Views.Admin
+namespace ProyectoP2Patoalarmas.ViewModels
 {
     public class UsuarioViewModel : INotifyPropertyChanged
     {
@@ -88,11 +89,11 @@ namespace ProyectoP2Patoalarmas.Views.Admin
         // Agregar usuario ya existente
         public async Task EditarUsuario(Usuario usuario)
         {
-            
+
             var editPage = new EditarUsuarioPage();
             editPage.BindingContext = new EditarUsuarioViewModel(usuario);
             await Application.Current.MainPage.Navigation.PushAsync(editPage);
-            
+
             /*
             var editPage = new EditarUsuarioPage();
             editPage.BindingContext = new EditarUsuarioViewModel(usuario);

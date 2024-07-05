@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ProyectoP2Patoalarmas.Views.Admin
+namespace ProyectoP2Patoalarmas.ViewModels
 {
     public class VehiculoViewModel : INotifyPropertyChanged
     {

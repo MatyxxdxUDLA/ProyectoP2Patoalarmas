@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ProyectoP2Patoalarmas.Views.Admin
+namespace ProyectoP2Patoalarmas.ViewModels
 {
     public class EditarUsuarioViewModel : INotifyPropertyChanged
     {

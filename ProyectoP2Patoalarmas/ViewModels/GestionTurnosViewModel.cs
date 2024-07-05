@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.IO;
 using Microsoft.Maui.Storage;
 
-namespace ProyectoP2Patoalarmas.Views.Admin
+namespace ProyectoP2Patoalarmas.ViewModels
 {
     public class GestionTurnosViewModel : INotifyPropertyChanged
     {

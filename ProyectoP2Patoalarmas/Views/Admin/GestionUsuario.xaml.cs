@@ -1,4 +1,5 @@
 using ProyectoP2Patoalarmas.Models;
+using ProyectoP2Patoalarmas.ViewModels;
 
 namespace ProyectoP2Patoalarmas.Views.Admin;
 

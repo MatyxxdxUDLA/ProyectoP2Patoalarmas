@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ProyectoP2Patoalarmas.Views.Admin
+namespace ProyectoP2Patoalarmas.ViewModels
 {
     public class GestionServiciosViewModel : INotifyPropertyChanged
     {
@@ -60,7 +60,7 @@ namespace ProyectoP2Patoalarmas.Views.Admin
             OnPropertyChanged(nameof(NewServicio));
 
             // Mostrar mensaje de confirmación
-            await App.Current.MainPage.DisplayAlert("Éxito", "Servicio agregado", "OK");
+            await Application.Current.MainPage.DisplayAlert("Éxito", "Servicio agregado", "OK");
         }
 
         private async Task OnUpdateServicio(Servicio servicio)
@@ -80,7 +80,7 @@ namespace ProyectoP2Patoalarmas.Views.Admin
                 OnPropertyChanged(nameof(Servicios));
 
                 // Mostrar mensaje de confirmación
-                await App.Current.MainPage.DisplayAlert("Éxito", "Servicio actualizado", "OK");
+                await Application.Current.MainPage.DisplayAlert("Éxito", "Servicio actualizado", "OK");
             }
         }
 
