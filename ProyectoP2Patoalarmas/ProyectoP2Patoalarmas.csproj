@@ -57,6 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Resources\NewFolder\**" />
+	  <Compile Remove="Resources\NewFolder\**" />
+	  <EmbeddedResource Remove="Resources\NewFolder\**" />
+	  <MauiCss Remove="Resources\NewFolder\**" />
+	  <MauiXaml Remove="Resources\NewFolder\**" />
+	  <None Remove="Resources\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazor.Bootstrap" Version="3.0.0-preview.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
 		  <PrivateAssets>all</PrivateAssets>
@@ -77,6 +87,9 @@
 	  <MauiXaml Update="Views\Admin\EditarUsuarioPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Admin\EditarVehiculoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Admin\GestionServiciosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -95,6 +108,11 @@
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\CSS\" />
+	  <Folder Include="Resources\JS\" />
 	</ItemGroup>
 
 </Project>

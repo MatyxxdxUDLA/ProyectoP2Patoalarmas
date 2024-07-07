@@ -4,66 +4,70 @@
              xmlns:local="clr-namespace:ProyectoP2Patoalarmas.ViewModels"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.GestionVehiculoPage"
              x:Name="Gestion_Vehiculo"
-             Title="Gestión de Vehículos">
+             Title="Gestión de Vehículos"
+             BackgroundColor="#243447">
+    <!-- Color de fondo para mantener consistencia -->
 
     <ContentPage.BindingContext>
         <local:VehiculoViewModel />
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <StackLayout Padding="20" Spacing="20" BackgroundColor="#f5f5f5">
+        <VerticalStackLayout Spacing="20" Padding="20">
 
             <!-- Título -->
             <Label Text="Gestión de Vehículos" 
                    FontSize="Large" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
-                   TextColor="#333" />
+                   TextColor="White" />
 
             <!-- Formulario para agregar un nuevo vehículo -->
-            <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
-                <StackLayout Spacing="15">
-                    <Label Text="Agregar Nuevo Vehículo" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                    <Entry x:Name="MarcaEntry" Placeholder="Ingrese la marca del vehículo" TextColor="Black"/>
-                    <Entry x:Name="ModeloEntry" Placeholder="Ingrese el modelo del vehículo" TextColor="Black"/>
-                    <Entry x:Name="AnioEntry" Placeholder="Ingrese el año del vehículo" Keyboard="Numeric" TextColor="Black"/>
-                    <Picker x:Name="UsuarioPicker" Title="Seleccione un usuario" ItemsSource="{Binding Usuarios}" ItemDisplayBinding="{Binding Cedula}" TextColor="Black" TitleColor="Black" />
-                    <Button Text="Guardar Vehículo" Clicked="OnGuardarVehiculoClicked" BackgroundColor="#2196F3" TextColor="White" CornerRadius="20"/>
-                </StackLayout>
-            </Frame>
+            <Label Text="Agregar Nuevo Vehículo" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+            <Entry x:Name="MarcaEntry" Placeholder="Ingrese la marca del vehículo" PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="ModeloEntry" Placeholder="Ingrese el modelo del vehículo" PlaceholderColor="Gray" TextColor="White"/>
+            <Entry x:Name="AnioEntry" Placeholder="Ingrese el año del vehículo" PlaceholderColor="Gray" TextColor="White" Keyboard="Numeric"/>
+            <Picker x:Name="UsuarioPicker" Title="Seleccione un usuario" ItemsSource="{Binding Usuarios}" ItemDisplayBinding="{Binding Cedula}" TextColor="White" TitleColor="Gray" />
+            <Button Text="Guardar Vehículo" Clicked="OnGuardarVehiculoClicked" BackgroundColor="#3355AA" TextColor="White" CornerRadius="5"/>
 
             <!-- Lista de vehículos -->
             <Label Text="Lista de Vehículos" 
                    FontSize="Medium" 
                    FontAttributes="Bold" 
-                   TextColor="#333" 
+                   TextColor="White" 
                    Margin="0,0,0,10"/>
-            <ListView ItemsSource="{Binding Vehiculos}" Margin="0,0,0,20">
-                <ListView.ItemTemplate>
+
+            <CollectionView x:Name="VehiculosListView" SelectionMode="Single" ItemsSource="{Binding Vehiculos}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
-                                <StackLayout Spacing="5">
-                                    <Label Text="Marca:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Marca}" FontSize="Medium" TextColor="Black" Placeholder="Marca del Vehículo"/>
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                                    <Label Text="Modelo:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Modelo}" FontSize="Small" TextColor="Black" Placeholder="Modelo del Vehículo"/>
+                            <!-- Display Marca -->
+                            <Label Text="{Binding Marca}" TextColor="White" 
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                    <Label Text="Año:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Anio}" FontSize="Small" TextColor="Black" Placeholder="Año del Vehículo" Keyboard="Numeric"/>
+                            <!-- Display Modelo -->
+                            <Label Text="{Binding Modelo}" TextColor="White" Grid.Column="1"
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                    <StackLayout Orientation="Horizontal" Spacing="10">
-                                        <Button Text="Actualizar" Command="{Binding BindingContext.UpdateVehiculoCommand, Source={x:Reference Gestion_Vehiculo}}" CommandParameter="{Binding .}" BackgroundColor="#FFC107" TextColor="Black" CornerRadius="20" />
-                                        <Button Text="Eliminar" Command="{Binding BindingContext.DeleteVehiculoCommand, Source={x:Reference Gestion_Vehiculo}}" CommandParameter="{Binding .}" BackgroundColor="#F44336" TextColor="Black" CornerRadius="20" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
+                            <!-- Botones para actualizar y eliminar -->
+                            <Button Grid.Column="2" Text="Actualizar" BackgroundColor="#FFC107" TextColor="Black" CornerRadius="5"
+                                Command="{Binding Path=BindingContext.EditarVehiculoCommand, Source={x:Reference Gestion_Vehiculo}}"
+                                CommandParameter="{Binding}"/>
+                            <Button Grid.Column="3" Text="Eliminar" BackgroundColor="DarkRed" TextColor="White" CornerRadius="5"
+                                Command="{Binding Path=BindingContext.EliminarVehiculoCommand, Source={x:Reference Gestion_Vehiculo}}"
+                                CommandParameter="{Binding}"/>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        </StackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
