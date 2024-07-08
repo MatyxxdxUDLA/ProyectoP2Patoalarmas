@@ -59,6 +59,14 @@
 	<ItemGroup>
 		<PackageReference Include="EmbedIO" Version="3.5.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+	  <EmbeddedResource Remove="Resources\NewFolder\**" />
+	  <MauiCss Remove="Resources\NewFolder\**" />
+	  <MauiXaml Remove="Resources\NewFolder\**" />
+	  <None Remove="Resources\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazor.Bootstrap" Version="3.0.0-preview.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">

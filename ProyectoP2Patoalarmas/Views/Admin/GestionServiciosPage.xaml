@@ -19,7 +19,7 @@
                    FontSize="Large" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
-                   TextColor="White" />
+                   TextColor="#333" />
 
             <!-- Formulario para agregar un nuevo servicio -->
             <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
@@ -37,23 +37,22 @@
             <Label Text="Lista de Servicios" 
                    FontSize="Medium" 
                    FontAttributes="Bold" 
-                   TextColor="White" 
-                   HorizontalOptions="Center"/>
-
-            <CollectionView x:Name="ServiciosListView" SelectionMode="Single" ItemsSource="{Binding Servicios}">
-                <CollectionView.ItemTemplate>
+                   TextColor="#333" 
+                   Margin="0,0,0,10"/>
+            <ListView ItemsSource="{Binding Servicios}" Margin="0,0,0,20">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10" ColumnSpacing="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <ViewCell>
+                            <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
+                                <StackLayout Spacing="5">
+                                    <Label Text="Nombre del Servicio:" FontAttributes="Bold" TextColor="Black"/>
+                                    <Entry Text="{Binding Nombre}" FontSize="Medium" TextColor="Black" Placeholder="Nombre del Servicio"/>
 
-                            <!-- Display Nombre del Servicio -->
-                            <Label Text="{Binding Nombre}" TextColor="White" 
-                                   VerticalOptions="Center" HorizontalOptions="Start"/>
+                                    <Label Text="Descripción:" FontAttributes="Bold" TextColor="Black"/>
+                                    <Entry Text="{Binding Descripcion}" FontSize="Small" TextColor="Black" Placeholder="Descripción"/>
+
+                                    <Label Text="Duración Estimada (min):" FontAttributes="Bold" TextColor="Black"/>
+                                    <Entry Text="{Binding DuracionEstimada}" FontSize="Small" TextColor="Black" Placeholder="Duración Estimada (min)" Keyboard="Numeric"/>
 
                             <!-- Display Descripción del Servicio -->
                             <Label Text="{Binding Descripcion}" TextColor="White" Grid.Column="1"
@@ -76,8 +75,8 @@
                                 CommandParameter="{Binding}"/>
                         </Grid>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </ListView.ItemTemplate>
+            </ListView>
 
         </StackLayout>
     </ScrollView>

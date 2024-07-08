@@ -12,7 +12,7 @@
                    FontSize="Large" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
-                   TextColor="White" />
+                   TextColor="#333" />
 
             <!-- Formulario para agregar un nuevo vehículo -->
             <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
@@ -30,7 +30,7 @@
             <Label Text="Lista de Vehículos" 
                    FontSize="Medium" 
                    FontAttributes="Bold" 
-                   TextColor="White" 
+                   TextColor="#333" 
                    Margin="0,0,0,10"/>
             <ListView ItemsSource="{Binding Vehiculos}" Margin="0,0,0,20">
                 <ListView.ItemTemplate>
