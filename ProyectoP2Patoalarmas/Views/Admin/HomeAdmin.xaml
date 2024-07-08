@@ -2,13 +2,14 @@
 <FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.HomeAdmin"
+             FlyoutLayoutBehavior="SplitOnLandscape"
              BackgroundColor="#123456">
     <!-- Asegúrate de cambiar este color por el que estás usando en tu esquema -->
 
     <FlyoutPage.Flyout>
         <ContentPage Title="Menú" BackgroundColor="#243447">
             <!-- Color de fondo oscuro para el menú -->
-            <Grid Padding="10" RowSpacing="10" ColumnSpacing="10"
+            <Grid Padding="10" RowSpacing="10"
                   HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -18,22 +19,21 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+ 
 
+                <!-- Los botones ahora tienen un ancho mínimo pero se expandirán según el espacio disponible -->
                 <Button Text="Gestión de Usuarios"
                         Clicked="OnGestionUsuariosClicked"
-                        HeightRequest="50"
-                        WidthRequest="200"
-                        Margin="5"
+                        Grid.Row="0" Grid.Column="0" Margin="5"
                         BackgroundColor="#3355AA"
                         TextColor="White"
                         FontAttributes="Bold"
                         CornerRadius="5"
-                        Grid.Row="0"/>
+                        HorizontalOptions="Fill" />
+
                 <Button Text="Gestión de Servicios"
                         Clicked="OnGestionServiciosClicked"
-                        HeightRequest="50"
-                        WidthRequest="200"
-                        Margin="5"
+                        Grid.Row="1" Grid.Column="0" Margin="5"
                         BackgroundColor="#3355AA"
                         TextColor="White"
                         FontAttributes="Bold"
@@ -53,9 +53,7 @@
 
                 <Button Text="Gestión de Turnos"
                         Clicked="OnGestionTurnosClicked"
-                        HeightRequest="50"
-                        WidthRequest="200"
-                        Margin="5"
+                        Grid.Row="2" Grid.Column="0" Margin="5"
                         BackgroundColor="#3355AA"
                         TextColor="White"
                         FontAttributes="Bold"
@@ -75,15 +73,14 @@
 
                 <Button Text="Cerrar Sesión"
                         Clicked="OnCerrarSesionClicked"
-                        HeightRequest="50"
-                        WidthRequest="200"
-                        Margin="5"
+                        Grid.Row="4" Grid.Column="0" Margin="5"
                         BackgroundColor="#3355AA"
                         TextColor="White"
                         FontAttributes="Bold"
                         CornerRadius="5"
                         Grid.Row="5"/>
             </Grid>
+
         </ContentPage>
     </FlyoutPage.Flyout>
 

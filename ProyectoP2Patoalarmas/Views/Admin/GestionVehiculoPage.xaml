@@ -32,8 +32,9 @@
                    FontAttributes="Bold" 
                    TextColor="#333" 
                    Margin="0,0,0,10"/>
-            <ListView ItemsSource="{Binding Vehiculos}" Margin="0,0,0,20">
-                <ListView.ItemTemplate>
+
+            <CollectionView x:Name="VehiculosListView" SelectionMode="Single" ItemsSource="{Binding Vehiculos}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
@@ -41,11 +42,13 @@
                                     <Label Text="Marca:" FontAttributes="Bold" TextColor="Black"/>
                                     <Entry Text="{Binding Marca}" FontSize="Medium" TextColor="Black" Placeholder="Marca del Vehículo"/>
 
-                                    <Label Text="Modelo:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Modelo}" FontSize="Small" TextColor="Black" Placeholder="Modelo del Vehículo"/>
+                            <!-- Display Marca -->
+                            <Label Text="{Binding Marca}" TextColor="White" 
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                    <Label Text="Año:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Anio}" FontSize="Small" TextColor="Black" Placeholder="Año del Vehículo" Keyboard="Numeric"/>
+                            <!-- Display Modelo -->
+                            <Label Text="{Binding Modelo}" TextColor="White" Grid.Column="1"
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
                                     <HorizontalStackLayout Spacing="10">
                                         <Button Text="Actualizar" Command="{Binding Path=BindingContext.UpdateVehiculoCommand, Source={x:Reference PageGestionServicios}}" CommandParameter="{Binding .}" BackgroundColor="#FFC107" TextColor="Black" CornerRadius="20" />

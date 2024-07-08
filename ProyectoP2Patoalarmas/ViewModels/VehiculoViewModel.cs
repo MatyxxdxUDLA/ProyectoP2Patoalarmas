@@ -84,6 +84,17 @@ namespace ProyectoP2Patoalarmas.ViewModels
         public ICommand UpdateVehiculoCommand { get; }
         public ICommand DeleteVehiculoCommand { get; }
 
+        private Vehiculo _selectedVehiculo;
+        public Vehiculo SelectedVehiculo
+        {
+            get => _selectedVehiculo;
+            set
+            {
+                _selectedVehiculo = value;
+                OnPropertyChanged(nameof(SelectedVehiculo));
+            }
+        }
+
         public VehiculoViewModel()
         {
             _context = new AppDbContext();
@@ -96,7 +107,9 @@ namespace ProyectoP2Patoalarmas.ViewModels
 
             CargarVehiculos();
             CargarUsuarios();
+            CargarVehiculos(); // Asegúrate de llamar a este método si necesitas cargar los vehículos al iniciar.
         }
+
 
         public async Task CargarVehiculos()
         {
@@ -173,6 +186,22 @@ namespace ProyectoP2Patoalarmas.ViewModels
 
                 Vehiculos.Remove(vehiculo);
             }
+        }
+
+        private async void OnGuardarCambios()
+        {
+            var vehiculoExistente = _context.Vehiculos.FirstOrDefault(v => v.Id == SelectedVehiculo.Id);
+            if (vehiculoExistente != null)
+            {
+                vehiculoExistente.Marca = SelectedVehiculo.Marca;
+                vehiculoExistente.Modelo = SelectedVehiculo.Modelo;
+                vehiculoExistente.Anio = SelectedVehiculo.Anio;
+                vehiculoExistente.UsuarioId = SelectedVehiculo.UsuarioId;
+                await _context.SaveChangesAsync();
+                OnPropertyChanged(nameof(Vehiculos));
+            }
+
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
