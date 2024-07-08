@@ -16,7 +16,6 @@
                         CommandParameter="{Binding Text, Source={x:Reference CedulaEntry}}" 
                         BackgroundColor="#4CAF50" 
                         TextColor="White"/>
-
                 </VerticalStackLayout>
             </Frame>
 
@@ -29,17 +28,15 @@
             </Frame>
 
             <!-- Selección de servicios -->
-            <Picker x:Name="ServicioPicker" Title="Seleccione un Servicio" ItemsSource="{Binding Servicios}" ItemDisplayBinding="{Binding Nombre}" BackgroundColor="White" TextColor="Black"/>
+            <Picker x:Name="ServicioPicker" Title="Seleccione un Servicio" ItemsSource="{Binding Servicios}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ServicioSeleccionado}" BackgroundColor="White" TextColor="Black"/>
 
             <!-- Selector de fecha y hora -->
-            <DatePicker x:Name="FechaPicker" TextColor="White" Format="D" />
-            <TimePicker x:Name="HoraPicker" TextColor="White" Format="T" />
+            <DatePicker x:Name="FechaPicker" Date="{Binding FechaSeleccionada}" TextColor="White" Format="D" />
+            <TimePicker x:Name="HoraPicker" Time="{Binding HoraSeleccionada}" TextColor="White" Format="T" />
 
             <!-- Botón para guardar el turno -->
             <Button Text="Agendar Turno" Command="{Binding AgendarTurnoCommand}" BackgroundColor="#4CAF50" TextColor="White"/>
 
-            <Label Text="{Binding FileInfoText}" />
-            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

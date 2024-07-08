@@ -16,6 +16,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Button Text="Gestión de Usuarios"
@@ -38,16 +39,7 @@
                         FontAttributes="Bold"
                         CornerRadius="5"
                         Grid.Row="1"/>
-                <Button Text="Gestión de Turnos"
-                        Clicked="OnGestionTurnosClicked"
-                        HeightRequest="50"
-                        WidthRequest="200"
-                        Margin="5"
-                        BackgroundColor="#3355AA"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        CornerRadius="5"
-                        Grid.Row="2"/>
+
                 <Button Text="Gestión de Vehículos"
                         Clicked="OnGestionVehiculoClicked"
                         HeightRequest="50"
@@ -57,7 +49,30 @@
                         TextColor="White"
                         FontAttributes="Bold"
                         CornerRadius="5"
+                        Grid.Row="2"/>
+
+                <Button Text="Gestión de Turnos"
+                        Clicked="OnGestionTurnosClicked"
+                        HeightRequest="50"
+                        WidthRequest="200"
+                        Margin="5"
+                        BackgroundColor="#3355AA"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="5"
                         Grid.Row="3"/>
+
+                <Button Text="Listado Turnos"
+                        Clicked="OnVerTurnosClicked"
+                        HeightRequest="50"
+                        WidthRequest="200"
+                        Margin="5"
+                        BackgroundColor="#3355AA"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="5"
+                        Grid.Row="4"/>
+
                 <Button Text="Cerrar Sesión"
                         Clicked="OnCerrarSesionClicked"
                         HeightRequest="50"
@@ -67,7 +82,7 @@
                         TextColor="White"
                         FontAttributes="Bold"
                         CornerRadius="5"
-                        Grid.Row="4"/>
+                        Grid.Row="5"/>
             </Grid>
         </ContentPage>
     </FlyoutPage.Flyout>

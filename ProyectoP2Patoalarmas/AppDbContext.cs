@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ProyectoP2Patoalarmas.Models;
 
 namespace ProyectoP2Patoalarmas
@@ -13,11 +8,12 @@ namespace ProyectoP2Patoalarmas
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
         public DbSet<Vehiculo> Vehiculos { get; set; }
-
+        public DbSet<Turno> Turnos { get; set; }
 
         // Constructor que acepta DbContextOptions
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public AppDbContext()
@@ -41,7 +37,24 @@ namespace ProyectoP2Patoalarmas
                 .WithMany(u => u.Vehiculos)
                 .HasForeignKey(v => v.UsuarioId)
                 .OnDelete(DeleteBehavior.Cascade);
-        }
 
+            modelBuilder.Entity<Turno>()
+                .HasOne(t => t.Usuario)
+                .WithMany(u => u.Turnos)
+                .HasForeignKey(t => t.UsuarioId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Turno>()
+                .HasOne(t => t.Servicio)
+                .WithMany(s => s.Turnos)
+                .HasForeignKey(t => t.ServicioId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Turno>()
+                .HasOne(t => t.Vehiculo)
+                .WithMany(v => v.Turnos)
+                .HasForeignKey(t => t.VehiculoId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

@@ -48,7 +48,17 @@ public partial class HomeAdmin : FlyoutPage
         // Asignar el Detail
         Detail = navigationPage; // Cambia la página principal a la de login
     }
-    private async void OnCerrarSesionClicked(object sender, EventArgs e)
+
+    private async void OnVerTurnosClicked(object sender, EventArgs e)
+    {
+        var verTurnosPage = new VistaTurnos();
+        var navigationPage = new NavigationPage(verTurnosPage);
+
+        // Asignar el Detail
+        Detail = navigationPage; // Cambia la página principal a la de login
+    }
+
+        private async void OnCerrarSesionClicked(object sender, EventArgs e)
     {
         // Aquí puedes agregar cualquier lógica necesaria para "cerrar sesión", como limpiar datos
         await Application.Current.MainPage.Navigation.PopToRootAsync(); // Esto asume que quieres volver a la página raíz

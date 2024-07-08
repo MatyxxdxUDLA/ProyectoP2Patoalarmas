@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProyectoP2Patoalarmas;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Controls.Hosting;
 
 public static class MauiProgram
 {
@@ -17,6 +20,7 @@ public static class MauiProgram
         // Configuración del servicio de DbContext
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite($"Filename=MiAppDatabase.db"));
+
 
         var app = builder.Build();
 

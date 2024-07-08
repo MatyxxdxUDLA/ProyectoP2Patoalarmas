@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ProyectoP2Patoalarmas.ViewModels"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.GestionVehiculoPage"
-             x:Name="Gestion_Vehiculo"
              Title="Gestión de Vehículos">
 
-    <ContentPage.BindingContext>
-        <local:VehiculoViewModel />
-    </ContentPage.BindingContext>
-
     <ScrollView>
-        <StackLayout Padding="20" Spacing="20" BackgroundColor="#f5f5f5">
+        <VerticalStackLayout Padding="20" Spacing="20" BackgroundColor="#243447">
 
             <!-- Título -->
             <Label Text="Gestión de Vehículos" 
                    FontSize="Large" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
-                   TextColor="#333" />
+                   TextColor="White" />
 
             <!-- Formulario para agregar un nuevo vehículo -->
             <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
-                <StackLayout Spacing="15">
+                <VerticalStackLayout Spacing="15">
                     <Label Text="Agregar Nuevo Vehículo" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                    <Entry x:Name="MarcaEntry" Placeholder="Ingrese la marca del vehículo" TextColor="Black"/>
-                    <Entry x:Name="ModeloEntry" Placeholder="Ingrese el modelo del vehículo" TextColor="Black"/>
-                    <Entry x:Name="AnioEntry" Placeholder="Ingrese el año del vehículo" Keyboard="Numeric" TextColor="Black"/>
-                    <Picker x:Name="UsuarioPicker" Title="Seleccione un usuario" ItemsSource="{Binding Usuarios}" ItemDisplayBinding="{Binding Cedula}" TextColor="Black" TitleColor="Black" />
-                    <Button Text="Guardar Vehículo" Clicked="OnGuardarVehiculoClicked" BackgroundColor="#2196F3" TextColor="White" CornerRadius="20"/>
-                </StackLayout>
+                    <Entry Placeholder="Ingrese la marca del vehículo" Text="{Binding Marca}" TextColor="Black" />
+                    <Entry Placeholder="Ingrese el modelo del vehículo" Text="{Binding Modelo}" TextColor="Black" />
+                    <Entry Placeholder="Ingrese el año del vehículo" Text="{Binding Anio}" Keyboard="Numeric" TextColor="Black" />
+                    <Picker Title="Seleccione un usuario" ItemsSource="{Binding Usuarios}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding SelectedUsuario}" TextColor="Black" />
+                    <Button Text="Guardar Vehículo" Command="{Binding AddVehiculoCommand}" BackgroundColor="#2196F3" TextColor="White" CornerRadius="20"/>
+                </VerticalStackLayout>
             </Frame>
 
             <!-- Lista de vehículos -->
             <Label Text="Lista de Vehículos" 
                    FontSize="Medium" 
                    FontAttributes="Bold" 
-                   TextColor="#333" 
+                   TextColor="White" 
                    Margin="0,0,0,10"/>
             <ListView ItemsSource="{Binding Vehiculos}" Margin="0,0,0,20">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
-                                <StackLayout Spacing="5">
+                                <VerticalStackLayout Spacing="5">
                                     <Label Text="Marca:" FontAttributes="Bold" TextColor="Black"/>
                                     <Entry Text="{Binding Marca}" FontSize="Medium" TextColor="Black" Placeholder="Marca del Vehículo"/>
 
@@ -53,17 +47,16 @@
                                     <Label Text="Año:" FontAttributes="Bold" TextColor="Black"/>
                                     <Entry Text="{Binding Anio}" FontSize="Small" TextColor="Black" Placeholder="Año del Vehículo" Keyboard="Numeric"/>
 
-                                    <StackLayout Orientation="Horizontal" Spacing="10">
-                                        <Button Text="Actualizar" Command="{Binding BindingContext.UpdateVehiculoCommand, Source={x:Reference Gestion_Vehiculo}}" CommandParameter="{Binding .}" BackgroundColor="#FFC107" TextColor="Black" CornerRadius="20" />
-                                        <Button Text="Eliminar" Command="{Binding BindingContext.DeleteVehiculoCommand, Source={x:Reference Gestion_Vehiculo}}" CommandParameter="{Binding .}" BackgroundColor="#F44336" TextColor="Black" CornerRadius="20" />
-                                    </StackLayout>
-                                </StackLayout>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Button Text="Actualizar" Command="{Binding Path=BindingContext.UpdateVehiculoCommand, Source={x:Reference PageGestionServicios}}" CommandParameter="{Binding .}" BackgroundColor="#FFC107" TextColor="Black" CornerRadius="20" />
+                                        <Button Text="Eliminar" Command="{Binding Path=BindingContext.DeleteVehiculoCommand, Source={x:Reference PageGestionServicios}}" CommandParameter="{Binding .}" BackgroundColor="#F44336" TextColor="Black" CornerRadius="20" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
                             </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-        </StackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

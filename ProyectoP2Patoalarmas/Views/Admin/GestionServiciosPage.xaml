@@ -4,30 +4,32 @@
              xmlns:local="clr-namespace:ProyectoP2Patoalarmas.ViewModels"
              x:Class="ProyectoP2Patoalarmas.Views.Admin.GestionServiciosPage"
              x:Name="PageGestionServicios"
-             Title="Gestión de Servicios">
+             Title="Gestión de Servicios"
+             BackgroundColor="#243447">
+
     <ContentPage.BindingContext>
         <local:GestionServiciosViewModel />
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <StackLayout Padding="20" Spacing="20" BackgroundColor="#f5f5f5">
+        <StackLayout Padding="20" Spacing="20">
 
             <!-- Título -->
             <Label Text="Gestión de Servicios" 
                    FontSize="Large" 
                    FontAttributes="Bold" 
                    HorizontalOptions="Center" 
-                   TextColor="#333" />
+                   TextColor="White" />
 
             <!-- Formulario para agregar un nuevo servicio -->
             <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
                 <StackLayout Spacing="15">
                     <Label Text="Agregar Nuevo Servicio" FontSize="Medium" FontAttributes="Bold" TextColor="Black"/>
-                    <Entry Placeholder="Nombre del Servicio" Text="{Binding NewServicio.Nombre}" TextColor="Black" />
-                    <Entry Placeholder="Descripción" Text="{Binding NewServicio.Descripcion}" TextColor="Black" />
-                    <Entry Placeholder="Duración Estimada (min)" Text="{Binding NewServicio.DuracionEstimada}" Keyboard="Numeric" TextColor="Black" />
-                    <Entry Placeholder="Costo" Text="{Binding NewServicio.Costo}" Keyboard="Numeric" TextColor="Black" />
-                    <Button Text="Guardar Servicio" Command="{Binding AddServicioCommand}" BackgroundColor="#2196F3" TextColor="White" CornerRadius="20"/>
+                    <Entry Placeholder="Nombre del Servicio" Text="{Binding NewServicio.Nombre}" TextColor="Black" PlaceholderColor="Gray"/>
+                    <Entry Placeholder="Descripción" Text="{Binding NewServicio.Descripcion}" TextColor="Black" PlaceholderColor="Gray"/>
+                    <Entry Placeholder="Duración Estimada (min)" Text="{Binding NewServicio.DuracionEstimada}" Keyboard="Numeric" TextColor="Black" PlaceholderColor="Gray"/>
+                    <Entry Placeholder="Costo" Text="{Binding NewServicio.Costo}" Keyboard="Numeric" TextColor="Black" PlaceholderColor="Gray"/>
+                    <Button Text="Guardar Servicio" Command="{Binding AddServicioCommand}" BackgroundColor="#3355AA" TextColor="White" CornerRadius="5"/>
                 </StackLayout>
             </Frame>
 
@@ -35,36 +37,47 @@
             <Label Text="Lista de Servicios" 
                    FontSize="Medium" 
                    FontAttributes="Bold" 
-                   TextColor="#333" 
-                   Margin="0,0,0,10"/>
-            <ListView ItemsSource="{Binding Servicios}" Margin="0,0,0,20">
-                <ListView.ItemTemplate>
+                   TextColor="White" 
+                   HorizontalOptions="Center"/>
+
+            <CollectionView x:Name="ServiciosListView" SelectionMode="Single" ItemsSource="{Binding Servicios}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Frame Padding="15" CornerRadius="10" BackgroundColor="White" Margin="0,0,0,20">
-                                <StackLayout Spacing="5">
-                                    <Label Text="Nombre del Servicio:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Nombre}" FontSize="Medium" TextColor="Black" Placeholder="Nombre del Servicio"/>
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                                    <Label Text="Descripción:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Descripcion}" FontSize="Small" TextColor="Black" Placeholder="Descripción"/>
+                            <!-- Display Nombre del Servicio -->
+                            <Label Text="{Binding Nombre}" TextColor="White" 
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                    <Label Text="Duración Estimada (min):" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding DuracionEstimada}" FontSize="Small" TextColor="Black" Placeholder="Duración Estimada (min)" Keyboard="Numeric"/>
+                            <!-- Display Descripción del Servicio -->
+                            <Label Text="{Binding Descripcion}" TextColor="White" Grid.Column="1"
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                    <Label Text="Costo:" FontAttributes="Bold" TextColor="Black"/>
-                                    <Entry Text="{Binding Costo}" FontSize="Small" TextColor="Black" Placeholder="Costo" Keyboard="Numeric"/>
+                            <!-- Display Duración Estimada del Servicio -->
+                            <Label Text="{Binding DuracionEstimada}" TextColor="White" Grid.Column="2"
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                    <StackLayout Orientation="Horizontal" Spacing="10">
-                                        <Button Text="Actualizar" Command="{Binding BindingContext.UpdateServicioCommand, Source={x:Reference PageGestionServicios}}" CommandParameter="{Binding .}" BackgroundColor="#FFC107" TextColor="White" CornerRadius="20" />
-                                        <Button Text="Eliminar" Command="{Binding BindingContext.DeleteServicioCommand, Source={x:Reference PageGestionServicios}}" CommandParameter="{Binding .}" BackgroundColor="#F44336" TextColor="White" CornerRadius="20" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
+                            <!-- Display Costo del Servicio -->
+                            <Label Text="{Binding Costo}" TextColor="White" Grid.Column="3"
+                                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                            <!-- Botones para actualizar y eliminar -->
+                            <Button Grid.Column="4" Text="Actualizar" BackgroundColor="#FFC107" TextColor="White" CornerRadius="5"
+                                Command="{Binding Path=BindingContext.UpdateServicioCommand, Source={x:Reference PageGestionServicios}}"
+                                CommandParameter="{Binding}"/>
+                            <Button Grid.Column="5" Text="Eliminar" BackgroundColor="DarkRed" TextColor="White" CornerRadius="5"
+                                Command="{Binding Path=BindingContext.DeleteServicioCommand, Source={x:Reference PageGestionServicios}}"
+                                CommandParameter="{Binding}"/>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </StackLayout>
     </ScrollView>
